@@ -6,16 +6,26 @@ public class Tablero {
      * Lo devuelve como resultado!
      */
     public static int[][] crearTableroBarcos(int filas, int columnas) {
-        // TODO
-        return null;
+        int[][] tablero = new int[filas][columnas];
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero.length; j++) {
+                tablero[i][j] = -1;
+            }
+        }
+        return tablero;
     }
 
     /**
      * Crea un tablero de disparos y lo inicializa a '~' (no disparado).
      */
     public static char[][] crearTableroDisparos(int filas, int columnas) {
-        // TODO
-        return null;
+        char[][] tableroDisparos = new char[filas][columnas];
+        for (int i = 0; i < tableroDisparos.length; i++) {
+            for (int j = 0; j < tableroDisparos.length; j++) {
+                tableroDisparos[i][j] = '~';
+            }
+        }
+        return tableroDisparos;
     }
 
     /**

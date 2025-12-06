@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Barcos {
 
     /**
@@ -15,7 +17,22 @@ public class Barcos {
      *
      */
     public static void colocarBarcosAleatorios(int[][] tableroBarcos, int[] tamanosBarcos) {
+        Random rand = new Random();
 
+        for (int i = 0; i < tamanosBarcos.length; i++) {
+            boolean colocado = false;
+
+            while (!colocado) {
+                int fila = rand.nextInt(tableroBarcos.length);
+                int columna = rand.nextInt(tableroBarcos[0].length);
+                boolean horizontal = rand.nextBoolean();
+
+                if (sePuedeColocarBarco(tableroBarcos, fila, columna, tamanosBarcos[i], horizontal)) {
+                    colocarBarco(tableroBarcos, fila, columna, tamanosBarcos[i], horizontal, i);
+                    colocado = true;
+                }
+            }
+        }
     }
 
     /**
@@ -25,15 +42,33 @@ public class Barcos {
      * Nos devuelve true si se puede colocar, false si no se puede colocar.
      */
     public static boolean sePuedeColocarBarco(int[][] tablero, int fila, int columna, int tamano, boolean horizontal) {
-        //TODO
-        return false;
+        if (horizontal) {
+            if (columna + tamano > tablero[0].length) return false;
+            for (int i = columna; i < columna + tamano; i++) {
+                if (tablero[fila][i] != -1) return false;
+            }
+        } else {
+            if (fila + tamano > tablero.length) return false;
+            for (int i = fila; i < fila + tamano; i++) {
+                if (tablero[i][columna] != -1) return false;
+            }
+        }
+        return true;
     }
 
     /**
      * Coloca realmente el barco en el tablero, escribiendo su ID en todas las celdas.
      */
     public static void colocarBarco(int[][] tablero, int fila, int columna, int tamano, boolean horizontal, int idBarco) {
-        // TODO
+        if (horizontal) {
+            for (int i = columna; i < columna + tamano; i++) {
+                tablero[fila][i] = idBarco;
+            }
+        } else {
+            for (int j = fila; j < fila + tamano; j++) {
+                tablero[j][columna] = idBarco;
+            }
+        }
     }
 
     /**
@@ -44,7 +79,9 @@ public class Barcos {
      * del jugador atacado para comprobar si ha acabado la partida.
      */
     public static boolean todosHundidos(int[] impactos, int[] tamanosBarcos) {
-        //TODO
-        return false;
+        for (int i = 0; i < impactos.length; i++) {
+            if (impactos[i] < tamanosBarcos[i]) return false;
+        }
+        return true;
     }
 }
