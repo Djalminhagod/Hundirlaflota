@@ -8,8 +8,13 @@ public class Utilidades {
      * Devuelve un número entero aleatorio entre min y max (ambos incluidos).
      */
     public static int numeroAleatorio(int min, int max) {
-        // TODO
-        return -1;
+
+        if (min > max) {
+            return -1;
+        }
+
+        int num = (int) (Math.random() * (max - min + 1)) + min;
+        return num;
     }
 
     /**
@@ -21,9 +26,19 @@ public class Utilidades {
      * Si la coordenada no es válida, debe devolver -1.
      */
     public static int convertirFila(String coord) {
-        // TODO: extraer la parte numérica y convertirla a int
 
-        return -1;
+        if (coord == null || coord.length() < 2) {
+            return -1;
+        }
+
+        String numeros = coord.substring(1); // parte numérica
+
+        try {
+            int fila = Integer.parseInt(numeros);
+            return fila;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
     /**
@@ -33,8 +48,20 @@ public class Utilidades {
      * Si la coordenada no es válida, puede devolver -1.
      */
     public static int convertirColumna(String coord) {
-       // TODO
-        return -1;
+
+        if (coord == null || coord.length() < 1) {
+            return -1;
+        }
+
+        char letra = Character.toUpperCase(coord.charAt(0));
+
+        if (letra < 'A' || letra > 'Z') {
+            return -1;
+        }
+
+        int columna = letra - 'A'; // A=0, B=1...
+
+        return columna;
     }
 
     /**
