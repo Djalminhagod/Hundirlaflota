@@ -29,6 +29,33 @@ public class Disparos {
             int[] tamanosBarco
     ) {
         // TODO
+
+        int idBarco = tableroBarcos[fila][columna];
+
+        // Si no hay barco
+        if (idBarco == -1) {
+            tableroDisparos[fila][columna] = 'A'; // Agua
+            return false;
+        }
+
+        // Sumar impacto
+        impactosBarco[idBarco] = impactosBarco[idBarco] + 1;
+
+        // Si todavía no está hundido
+        if (impactosBarco[idBarco] < tamanosBarco[idBarco]) {
+            tableroDisparos[fila][columna] = 'T'; // Tocado
+            return false;
+        }
+
+        // Si está hundido → marcar todas sus partes como H
+        for (int i = 0; i < tableroBarcos.length; i++) {
+            for (int j = 0; j < tableroBarcos[0].length; j++) {
+                if (tableroBarcos[i][j] == idBarco) {
+                    tableroDisparos[i][j] = 'H';
+                }
+            }
+        }
+
         return true;
     }
 }

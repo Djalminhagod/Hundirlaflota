@@ -17,15 +17,15 @@ public class Barcos {
      *
      */
     public static void colocarBarcosAleatorios(int[][] tableroBarcos, int[] tamanosBarcos) {
-        Random rand = new Random();
+        Random randombarcos = new Random();
 
         for (int i = 0; i < tamanosBarcos.length; i++) {
             boolean colocado = false;
 
             while (!colocado) {
-                int fila = rand.nextInt(tableroBarcos.length);
-                int columna = rand.nextInt(tableroBarcos[0].length);
-                boolean horizontal = rand.nextBoolean();
+                int fila = randombarcos.nextInt(tableroBarcos.length);
+                int columna = randombarcos.nextInt(tableroBarcos[0].length);
+                boolean horizontal = randombarcos.nextBoolean();
 
                 if (sePuedeColocarBarco(tableroBarcos, fila, columna, tamanosBarcos[i], horizontal)) {
                     colocarBarco(tableroBarcos, fila, columna, tamanosBarcos[i], horizontal, i);
@@ -65,8 +65,8 @@ public class Barcos {
                 tablero[fila][i] = idBarco;
             }
         } else {
-            for (int j = fila; j < fila + tamano; j++) {
-                tablero[j][columna] = idBarco;
+            for (int i = fila; i < fila + tamano; i++) {
+                tablero[i][columna] = idBarco;
             }
         }
     }

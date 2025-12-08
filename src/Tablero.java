@@ -8,7 +8,7 @@ public class Tablero {
     public static int[][] crearTableroBarcos(int filas, int columnas) {
         int[][] tablero = new int[filas][columnas];
         for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
+            for (int j = 0; j < tablero[i].length; j++) {
                 tablero[i][j] = -1;
             }
         }
@@ -21,7 +21,7 @@ public class Tablero {
     public static char[][] crearTableroDisparos(int filas, int columnas) {
         char[][] tableroDisparos = new char[filas][columnas];
         for (int i = 0; i < tableroDisparos.length; i++) {
-            for (int j = 0; j < tableroDisparos.length; j++) {
+            for (int j = 0; j < tableroDisparos[i].length; j++) {
                 tableroDisparos[i][j] = '~';
             }
         }
@@ -36,7 +36,21 @@ public class Tablero {
      * Recibe como entrada el tablero a imprimir, no devuelve nada de salida, simplemente lo imprime.
      */
     public static void mostrarTableroDisparos(char[][] tableroDisparos) {
-       // TODO
+        // Imprimir números de columna
+        System.out.print("   ");
+        for (int j = 0; j < tableroDisparos[0].length; j++) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
+
+
+        for (int i = 0; i < tableroDisparos.length; i++) {
+            System.out.print(i + "  ");
+            for (int j = 0; j < tableroDisparos[i].length; j++) {
+                System.out.print(tableroDisparos[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -55,14 +69,38 @@ public class Tablero {
      * - hay un barco, el barco "1": 1
      */
     public static void mostrarTableroConBarcos(int[][] tableroBarcos, char[][] tableroDisparosCPU) {
-        // TODO
+
+        System.out.print("   ");
+        for (int j = 0; j < tableroBarcos[0].length; j++) {
+            System.out.print(j + " ");
+        }
+        System.out.println();
+
+
+        for (int i = 0; i < tableroBarcos.length; i++) {
+            System.out.print(i + "  ");
+            for (int j = 0; j < tableroBarcos[i].length; j++) {
+                if (tableroBarcos[i][j] == -1) { // Agua
+                    System.out.print(tableroDisparosCPU[i][j] == '~' ? '.' : '~');
+                } else { // Hay barco
+                    if (tableroDisparosCPU[i][j] == 'T') {
+                        System.out.print('T'); // Tocado pero no hundido
+                    } else if (tableroDisparosCPU[i][j] == 'H') {
+                        System.out.print('H'); // Hundido
+                    } else {
+                        System.out.print(tableroBarcos[i][j]); // ID del barco
+                    }
+                }
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
     }
 
     /**
      * Comprueba si una coordenada está dentro del tablero. Devuelve "true" si está, "false" si no está.
      */
     public static boolean esCoordenadaValida(int fila, int columna, int filas, int columnas) {
-         // TODO
-        return false;
+        return fila >= 0 && fila < filas && columna >= 0 && columna < columnas;
     }
 }
