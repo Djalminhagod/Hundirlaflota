@@ -68,6 +68,7 @@ public class Utilidades {
      * Lee una línea de texto de la entrada estándar.
      */
     public static String leerLinea() {
+
         return SC.nextLine();
     }
 }
